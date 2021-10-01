@@ -1,12 +1,10 @@
-import express from "express";
-import dotenv from "dotenv";
-import app from "./app";
+import express from 'express';
+import dotenv from 'dotenv';
+import app from './app';
 
 dotenv.config();
 
 const PORT = process.env.PORT;
-
-app.use(express.json());
 
 app.listen(PORT, (err) => {
   if (!err) {
