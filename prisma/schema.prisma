@@ -25,17 +25,18 @@ model User {
 }
 
 model Product {
-  id                 Int      @id @default(autoincrement())
-  koreanName         String   @map("korean_name") @db.VarChar(100)
-  englishName        String   @map("english_name") @db.VarChar(100)
+  id                 Int       @id @default(autoincrement())
+  koreanName         String    @map("korean_name") @db.VarChar(100)
+  englishName        String    @map("english_name") @db.VarChar(100)
   price              Int
-  category           Category @relation(fields: [categoryId], references: [id])
-  categoryId         Int      @map("category_id")
-  description        String   @db.VarChar(3000)
-  textileInformation String   @db.VarChar(3000)
-  isNew              Boolean  @default(false) @map("is_new")
-  isSoldout          Boolean  @default(false) @map("is_soldout")
-  isSale             Boolean  @default(false) @map("is_sale")
+  category           Category  @relation(fields: [categoryId], references: [id])
+  categoryId         Int       @map("category_id")
+  description        String    @db.VarChar(3000)
+  textileInformation String    @map("textile_information") @db.VarChar(3000)
+  isNew              Boolean   @default(false) @map("is_new")
+  isSoldout          Boolean   @default(false) @map("is_soldout")
+  isSale             Boolean   @default(false) @map("is_sale")
+  createdAt          DateTime? @default(now()) @map("created_at")
   Image              Image[]
 
   @@map("products")
@@ -44,16 +45,18 @@ model Product {
 model Category {
   id           Int    @id @default(autoincrement())
   categoryName String @map("category_name") @db.VarChar(100)
+  subCategory  Json?   @map("sub_category")
 
   Product Product[]
+  
   @@map("categories")
 }
 
 model Image {
   id             Int     @id @default(autoincrement())
   mainImageUrl   String  @map("main_image_url") @db.VarChar(3000)
-  subImageUrl    String  @map("sub_image_url") @db.LongText
-  detailImageUrl String  @map("detail_image_url") @db.LongText
+  subImageUrl    Json    @map("sub_image_url")
+  detailImageUrl Json    @map("detail_image_url")
   productId      Int     @map("product_id")
   product        Product @relation(fields: [productId], references: [id])
 
