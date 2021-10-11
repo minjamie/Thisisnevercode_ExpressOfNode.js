@@ -1,9 +1,10 @@
 import { signInDao } from '../models';
-import jwt from 'jsonwebtoken';
+import jwtToken from '../../utils/jwt';
 import bcrypt from 'bcrypt';
 
 const signInUser = async (email, password) => {
   const [userInfo] = await signInDao.getUserInfo(email);
+
   if (userInfo === undefined) {
     // 이메일이 유효하지 않은 경우
     const error = new Error('INVALID EMAIL');
@@ -22,14 +23,14 @@ const signInUser = async (email, password) => {
     throw error;
   } else {
     // 비밀번호 + 이메일 맞는 경우
-    const accessToken = jwt.sign(
-      { id: userInfo.id, username: userInfo.name },
-      process.env.ACCESS_TOKEN_SECRET_KEY,
-      {
-        expiresIn: '1h',
-      }
-    );
-    return accessToken;
+
+    // 유틸 함수에 있는 jwt token 생성함수
+    const token = jwtToken.generate({
+      id: userInfo.id,
+      username: userInfo.name,
+    });
+
+    return token;
   }
 };
 
