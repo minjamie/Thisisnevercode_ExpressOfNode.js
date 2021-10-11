@@ -1,8 +1,8 @@
-import { listDao } from '../models';
+import { signUpDao } from '../models';
 
-const signUpUser = async () => {
-  const user = await signUpDao.signUpUser();
+const createUser = async () => {
+  const user = await signUpDao.createUser();
   return user;
 };
 
-export default { signUpUser };
+export default { createUser };

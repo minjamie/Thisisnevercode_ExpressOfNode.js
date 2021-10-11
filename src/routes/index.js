@@ -18,6 +18,12 @@ router.use('/product', productRouter);
 router.use('/sort', sortRouter);
 
 router.use('/account', signInRouter);
-router.use('/account', signUpRouter);
+router.use('/account', signUpRouter, () => {
+  app.use((err, req, res, next) => {
+    const { statusCode, message } = err;
+    console.error(err);
+    res.status(statusCode || 500).send(message);
+  });
+});
 
 export default router;
