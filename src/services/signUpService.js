@@ -1,4 +1,4 @@
-import { signUpDao } from '../../models';
+import { listDao } from '../models';
 
 const signUpUser = async () => {
   const user = await signUpDao.signUpUser();

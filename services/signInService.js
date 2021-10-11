@@ -1,4 +1,4 @@
-import { signInDao } from '../models';
+import { signInDao } from '../../models';
 
 const signInUser = async () => {
   console.log('3', signInDao);

@@ -1,4 +1,4 @@
-import { sortDao } from '../../models';
+import { listDao } from '../models';
 
 const getSort = async () => {
   const product = await sortDao.getSort();
