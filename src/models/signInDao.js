@@ -1,4 +1,4 @@
-import prisma from '../prisma';
+import prisma from '../../prisma';
 
 const signInUser = async () => {
   return await prisma.$queryRaw`
