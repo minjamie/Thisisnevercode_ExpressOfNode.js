@@ -17,7 +17,7 @@ router.use('/list', listRouter);
 router.use('/product', productRouter);
 router.use('/sort', sortRouter);
 
-router.use('/signin', signInRouter);
-router.use('/signup', signUpRouter);
+router.use('/account', signInRouter);
+router.use('/account', signUpRouter);
 
 export default router;
