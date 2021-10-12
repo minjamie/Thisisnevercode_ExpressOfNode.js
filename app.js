@@ -19,15 +19,15 @@ app.use(routes);
 
 // 모든 라우터를 검색하고 안떴을 때 나오는 화면
 app.use(apiErrorHandler);
-// app.use((req, res, next) => {
-//   res.status(404).send('Not Found');
-//   next();
-// });
+app.use((req, res, next) => {
+  res.status(404).send('Not Found');
+  next();
+});
 
-// app.use((err, req, res, next) => {
-//   const { statusCode, message } = err;
-//   console.error(err);
-//   res.status(statusCode || 500).send(message);
-// });
+app.use((err, req, res, next) => {
+  const { statusCode, message } = err;
+  console.error(err);
+  res.status(statusCode || 500).send(message);
+});
 
 module.exports = app;
