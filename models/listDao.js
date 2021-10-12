@@ -3,16 +3,18 @@ import prisma from '../prisma';
 const getList = async (id) => {
   return await prisma.$queryRaw`
     SELECT 
-      i.id,
-      i.main_image_url as image,
-      i.sub_image_url as subImage,
-      i.detail_image_url as detailImage,
-      p.english_name as name,
-      p.price
+      p.id,
+      p.price,
+      p.main_image_url,
+      di.key_number,
+      di.detail_image_url,
+      si.key_number,
+      si.sub_image_url
     FROM 
-      images i
-    LEFT JOIN
       products p
+    LEFT JOIN
+    detail_images di,
+    sub_images si
     ON
       i.product_id = p.id
     WHERE
