@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE `orders` ADD COLUMN `create_at` DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3);
