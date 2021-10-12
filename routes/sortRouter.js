@@ -7,7 +7,8 @@ router.get(
   '/',
   sortController.getSortByPriceHigh,
   sortController.getSortByPriceLow,
-  sortController.getSortByRecent
+  sortController.getSortByRecent,
+  sortController.getSortByTrend
 );
 
 // router.get('/list', sortController.getProductForList);

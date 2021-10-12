@@ -20,6 +20,7 @@ model User {
   updatedAt    DateTime? @default(now()) @map("updated_at")
   isDeleted    Boolean   @default(false) @map("is_deleted")
   policyAgreed Boolean   @default(false) @map("policy_agreed")
+  Order        Order[]
 
   @@map("users")
 }
@@ -35,9 +36,10 @@ model Product {
   textileInformation String    @map("textile_information") @db.VarChar(3000)
   isNew              Boolean   @default(false) @map("is_new")
   isSoldout          Boolean   @default(false) @map("is_soldout")
-  isSale             Boolean   @default(false) @map("is_sale")
+  isDiscount         Boolean   @default(false) @map("is_discount")
   createdAt          DateTime? @default(now()) @map("created_at")
   Image              Image[]
+  Order              Order[]
 
   @@map("products")
 }
@@ -60,4 +62,16 @@ model Image {
   product        Product @relation(fields: [productId], references: [id])
 
   @@map("images")
+}
+
+model Order {
+  id            Int       @id @default(autoincrement())
+  productId     Int       @map("product_id")
+  userId        Int       @map("user_id")
+  orderQuantity Int       @map("order_quantity")
+  createdAt     DateTime? @default(now()) @map("create_at")
+  product       Product   @relation(fields: [productId], references: [id])
+  user          User      @relation(fields: [userId], references: [id])
+
+  @@map("orders")
 }

@@ -8,10 +8,10 @@ const getSortByPriceHign = async () => {
            p.english_name,
            i.main_image_url,
            p.price
-FROM images i
-LEFT JOIN products p
-ON p.id = i.product_id
-ORDER BY p.price DESC;
+    FROM images i
+    LEFT JOIN products p
+    ON p.id = i.product_id
+    ORDER BY p.price DESC;
   `;
 };
 
@@ -23,10 +23,10 @@ const getSortByPriceLow = async () => {
            p.english_name,
            i.main_image_url,
            p.price
-FROM images i
-LEFT JOIN products p
-ON p.id = i.product_id
-ORDER BY p.price;
+    FROM images i
+    LEFT JOIN products p
+    ON p.id = i.product_id
+    ORDER BY p.price;
   `;
 };
 
@@ -39,10 +39,28 @@ const getSortByRecent = async () => {
            i.main_image_url,
            p.price,
            p.created_at
-FROM images i
-LEFT JOIN products p
-ON p.id = i.product_id
-ORDER BY p.created_at;
+    FROM images i
+    LEFT JOIN products p
+    ON p.id = i.product_id
+    ORDER BY p.created_at;
+  `;
+};
+
+const getSortByTrend = async () => {
+  return await prisma.$queryRaw`
+  SELECT i.id,
+	   i.sub_image_url,
+	   i.detail_image_url,
+	   p.english_name,
+       i.main_image_url,
+       p.price
+  FROM images i
+  LEFT JOIN orders o
+	ON i.product_id = o.product_id
+  JOIN products p
+	ON i.product_id = p.id
+  WHERE MONTH(o.create_at) = MONTH(CURRENT_TIMESTAMP)
+  ORDER BY o.product_id, o.create_at DESC;
   `;
 };
 
@@ -69,5 +87,6 @@ export default {
   getSortByPriceHign,
   getSortByPriceLow,
   getSortByRecent,
+  getSortByTrend,
   getProductForList,
 };

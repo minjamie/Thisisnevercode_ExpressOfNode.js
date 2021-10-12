@@ -12,6 +12,10 @@ const getSortByRecent = async () => {
   return await sortDao.getSortByRecent();
 };
 
+const getSortByTrend = async () => {
+  return await sortDao.getSortByTrend();
+};
+
 const getProductForList = async () => {
   const test = {
     LIST_DATA: {
@@ -27,5 +31,6 @@ export default {
   getSortByPriceHign,
   getSortByPriceLow,
   getSortByRecent,
+  getSortByTrend,
   getProductForList,
 };
