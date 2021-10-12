@@ -1,11 +1,12 @@
 import { categoryService } from '../services';
 
-const getCategory = async (req, res) => {
-  const category = await categoryService.getCategory();
-  res.status(200).json({
-    msg: 'SUCCESS',
-    category,
-  });
+const mainCategory = async (req, res) => {
+  try {
+    const mainCategory = await categoryService.mainCategory();
+    res.status(200).send(mainCategory);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-export default { getCategory };
+export default { mainCategory };
