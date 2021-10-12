@@ -4,13 +4,12 @@ const mainCategory = async () => {
   const mainCategory = await prisma.$queryRaw`   
   SELECT 
   c.id, 
-  c.category_name, 
+  c.category_name
   FROM categories c
-  UNION
+  UNION ALL
   SELECT
-  sc.id,
-  sc.category_name
-  FROM sub_categories sc
+  s.sub_category_name=14
+  FROM sub_categories s
   `;
   return mainCategory;
 };
