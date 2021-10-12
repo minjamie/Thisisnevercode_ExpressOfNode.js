@@ -4,7 +4,6 @@ import mainController from './mainController';
 import productController from './productController';
 import signInController from './signInController';
 import signUpController from './signUpController';
-import sortController from './sortController';
 
 export {
   categoryController,
@@ -13,5 +12,4 @@ export {
   productController,
   signInController,
   signUpController,
-  sortController,
 };

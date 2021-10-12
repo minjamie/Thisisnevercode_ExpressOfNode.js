@@ -4,7 +4,6 @@ import mainService from './mainService';
 import productService from './productService';
 import signInService from './signInService';
 import signUpService from './signUpService';
-import sortService from './sortService';
 
 export {
   categoryService,
@@ -13,5 +12,4 @@ export {
   productService,
   signInService,
   signUpService,
-  sortService,
 };
