@@ -7,7 +7,15 @@ class apiError {
     return new apiError(400, msg);
   }
 
-  static internal(msg) {
+  static keyError(msg) {
+    return new apiError(400, msg);
+  }
+
+  static notFoundError(msg) {
+    return new apiError(404, msg);
+  }
+
+  static internalError(msg) {
     return new apiError(500, msg);
   }
 }
