@@ -1,4 +1,4 @@
-import { mainDao } from '../models';
+import { listDao } from '../models';
 
 const getMain = async () => {
   const main = await mainDao.getMain();
