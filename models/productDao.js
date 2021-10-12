@@ -4,12 +4,12 @@ const getProductById = async (id) => {
   const [product] = await prisma.$queryRaw`
     SELECT 
       p.id,
-      p.english_name,
+      p.english_name as name,
       p.price,
       p.description,
-      p.textile_information,
-      i.detail_image_url,
-      i.sub_image_url
+      p.textile_information as textileInfo,
+      i.detail_image_url as subImg,
+      i.sub_image_url as detailImg
     FROM 
       products p
     LEFT JOIN 
