@@ -1,6 +1,6 @@
 import prisma from '../prisma';
 
-const getList = async () => {
+const getList = async (id) => {
   return await prisma.$queryRaw`
     SELECT 
       i.id,
@@ -18,6 +18,8 @@ const getList = async () => {
     WHERE
       i.id > 0
     ORDER BY p.id ASC
+    LIMIT 10
+    OFFSET ${id}
   `;
 };
 
