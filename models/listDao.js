@@ -18,7 +18,6 @@ const getList = async () => {
     WHERE
       i.id > 0
     ORDER BY p.id ASC
-    LIMIT 10
   `;
 };
 
