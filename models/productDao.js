@@ -1,6 +1,6 @@
-import prisma from '../../prisma';
+import prisma from '../prisma';
 
-const getMain = async () => {
+const getProduct = async () => {
   return await prisma.$queryRaw`
     SELECT 
       c.id, c.category_name
@@ -9,4 +9,4 @@ const getMain = async () => {
   `;
 };
 
-export default { getMain };
+export default { getProduct };

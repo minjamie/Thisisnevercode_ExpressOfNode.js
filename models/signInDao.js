@@ -1,4 +1,4 @@
-import prisma from '../../prisma';
+import prisma from '../prisma';
 
 const getUserInfo = async (email) => {
   return await prisma.$queryRaw`

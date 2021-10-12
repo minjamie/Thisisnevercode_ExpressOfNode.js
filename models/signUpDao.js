@@ -1,4 +1,4 @@
-import prisma from '../../prisma';
+import prisma from '../prisma';
 
 const createUser = async (userInfo) => {
   const { name, email, password, address } = userInfo;

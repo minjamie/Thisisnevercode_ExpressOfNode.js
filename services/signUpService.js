@@ -9,7 +9,6 @@ const makeHashedPsw = async (password) => {
 
 const createUser = async (userInfo) => {
   const [userData] = await signUpDao.getUserInfoByEmail(userInfo.email);
-  console.log(userData);
   if (userData) {
     // 이미 가입된 유저인 경우
     const error = new Error('DUPLICATED EMAIL');

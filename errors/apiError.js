@@ -13,5 +13,3 @@ class apiError {
 }
 
 module.exports = apiError;
-
-// console.log(module.exports.bedRequest());

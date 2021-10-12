@@ -5,9 +5,7 @@ import mainRouter from './mainRouter';
 import categoryRouter from './categoryRouter';
 import listRouter from './listRouter';
 import productRouter from './productRouter';
-import sortRouter from './sortRouter';
-import signInRouter from './signInRouter';
-import signUpRouter from './signUpRouter';
+import userRouter from './userRouter';
 
 router.use('/main', mainRouter);
 
@@ -15,9 +13,7 @@ router.use('/category', categoryRouter);
 
 router.use('/list', listRouter);
 router.use('/product', productRouter);
-router.use('/sort', sortRouter);
 
-router.use('/account', signInRouter);
-router.use('/account', signUpRouter);
+router.use('/account', userRouter);
 
 export default router;
