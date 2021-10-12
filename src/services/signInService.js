@@ -1,18 +1,22 @@
 import { signInDao } from '../models';
 import jwtToken from '../../utils/jwt';
 import bcrypt from 'bcrypt';
+import apiError from '../error/apiError';
 
-const signInUser = async (email, password) => {
+const signInUser = async (email, password, next) => {
   const [userInfo] = await signInDao.getUserInfo(email);
-
+  // console.log(apiError.badRequest());
   if (userInfo === undefined) {
     // 이메일이 유효하지 않은 경우
+
+    // next(apiError.badRequest('err'));
+
+    // return;
     const error = new Error('INVALID EMAIL');
     error.message = '유효하지 않은 이메일입니다.';
     error.statusCode = 403;
     throw error;
   }
-
   const validHashedPsw = await bcrypt.compare(password, userInfo.password);
 
   if (!validHashedPsw) {
