@@ -28,7 +28,7 @@ model User {
 model Product {
   id                 Int          @id @default(autoincrement())
   name               String       @db.VarChar(100)
-  price              Int
+  price              Decimal      @db.Decimal(10, 2)
   categoryId         Int          @map("category_id")
   category           Category     @relation(fields: [categoryId], references: [id])
   subCategoryId      Int?         @map("sub_category_id")
@@ -71,6 +71,7 @@ model SubCategory {
 
 model DetailImage {
   id             Int     @id @default(autoincrement())
+  keyNumber      String  @map("key_number") @db.VarChar(100) @unique
   detailImageUrl Int     @map("detail_image_url")
   productId      Int     @map("product_id")
   product        Product @relation(fields: [productId], references: [id])
@@ -80,6 +81,7 @@ model DetailImage {
 
 model SubImage {
   id          Int     @id @default(autoincrement())
+  keyNumber   String  @map("key_number") @db.VarChar(100) @unique
   subImageUrl Int     @map("sub_image_url")
   productId   Int     @map("product_id")
   product     Product @relation(fields: [productId], references: [id])
