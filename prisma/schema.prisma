@@ -68,7 +68,7 @@ model SubCategory {
 
 model DetailImage {
   id             Int     @id @default(autoincrement())
-  keyNumber      String  @map("key_number") @db.VarChar(100) @unique
+  keyNumber      String  @unique @map("key_number") @db.VarChar(100)
   detailImageUrl Int     @map("detail_image_url")
   productId      Int     @map("product_id")
   product        Product @relation(fields: [productId], references: [id])
@@ -78,7 +78,7 @@ model DetailImage {
 
 model SubImage {
   id          Int     @id @default(autoincrement())
-  keyNumber   String  @map("key_number") @db.VarChar(100) @unique
+  keyNumber   String  @unique @map("key_number") @db.VarChar(100)
   subImageUrl Int     @map("sub_image_url")
   productId   Int     @map("product_id")
   product     Product @relation(fields: [productId], references: [id])
