@@ -1,11 +1,12 @@
 import { listService } from '../services';
 
 const getList = async (req, res) => {
-  const id = req.params.id;
-  const list = await listService.getList(id);
+  const product = await listService.getList();
   res.status(200).json({
-    msg: 'SUCCESS',
-    list,
+    LIST_DATA: {
+      category: 'SHOES',
+      product,
+    },
   });
 };
 
