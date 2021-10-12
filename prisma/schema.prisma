@@ -11,51 +11,90 @@ generator client {
 }
 
 model User {
-  id           Int       @id @default(autoincrement())
-  name         String    @db.VarChar(100)
-  email        String    @unique @db.VarChar(100)
-  password     String    @db.VarChar(100)
-  address      String    @db.VarChar(100)
-  createdAt    DateTime? @default(now()) @map("created_at")
-  updatedAt    DateTime? @default(now()) @map("updated_at")
-  isDeleted    Boolean   @default(false) @map("is_deleted")
-  policyAgreed Boolean   @default(false) @map("policy_agreed")
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(100)
+  email     String    @unique @db.VarChar(100)
+  password  String    @db.VarChar(100)
+  address   String    @db.VarChar(100)
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @default(now()) @map("updated_at")
+  isDeleted Boolean   @default(false) @map("is_deleted")
+  deletedAt DateTime? @map("deleted_at")
+  Order     Order[]
 
   @@map("users")
 }
 
 model Product {
-  id                 Int      @id @default(autoincrement())
-  koreanName         String   @map("korean_name") @db.VarChar(100)
-  englishName        String   @map("english_name") @db.VarChar(100)
+  id                 Int          @id @default(autoincrement())
+  name               String       @db.VarChar(100)
   price              Int
-  category           Category @relation(fields: [categoryId], references: [id])
-  categoryId         Int      @map("category_id")
-  description        String   @db.VarChar(3000)
-  textileInformation String   @db.VarChar(3000)
-  isNew              Boolean  @default(false) @map("is_new")
-  isSoldout          Boolean  @default(false) @map("is_soldout")
-  isSale             Boolean  @default(false) @map("is_sale")
-  Image              Image[]
+  categoryId         Int          @map("category_id")
+  category           Category     @relation(fields: [categoryId], references: [id])
+  subCategoryId      Int?         @map("sub_category_id")
+  SubCategory        SubCategory? @relation(fields: [subCategoryId], references: [id])
+  description        String?      @db.VarChar(3000)
+  textileInformation String       @map("textile_information") @db.VarChar(3000)
+  isNew              Boolean      @default(false) @map("is_new")
+  isSoldout          Boolean      @default(false) @map("is_soldout")
+  isDiscount         Boolean      @default(false) @map("is_discount")
+  stockQuantity      Int          @map("stock_quantity")
+  createdAt          DateTime?    @default(now()) @map("created_at")
+  mainImageUrl       String       @map("main_image_url") @db.VarChar(3000)
+
+  Order       Order[]
+  DetailImage DetailImage[]
+  SubImage    SubImage[]
 
   @@map("products")
 }
 
 model Category {
-  id           Int    @id @default(autoincrement())
-  categoryName String @map("category_name") @db.VarChar(100)
+  id           Int           @id @default(autoincrement())
+  categoryName String        @map("category_name") @db.VarChar(100)
+  Product      Product[]
+  SubCategory  SubCategory[]
 
-  Product Product[]
   @@map("categories")
 }
 
-model Image {
+model SubCategory {
+  id              Int      @id @default(autoincrement())
+  subCategoryName String   @map("sub_category_name") @db.VarChar(100)
+  categoryId      Int      @map("category_id")
+  category        Category @relation(fields: [categoryId], references: [id])
+
+  Product Product[]
+
+  @@map("sub_categories")
+}
+
+model DetailImage {
   id             Int     @id @default(autoincrement())
-  mainImageUrl   String  @map("main_image_url") @db.VarChar(3000)
-  subImageUrl    String  @map("sub_image_url") @db.LongText
-  detailImageUrl String  @map("detail_image_url") @db.LongText
+  detailImageUrl Int     @map("detail_image_url")
   productId      Int     @map("product_id")
   product        Product @relation(fields: [productId], references: [id])
 
-  @@map("images")
+  @@map("detail_images")
+}
+
+model SubImage {
+  id          Int     @id @default(autoincrement())
+  subImageUrl Int     @map("sub_image_url")
+  productId   Int     @map("product_id")
+  product     Product @relation(fields: [productId], references: [id])
+
+  @@map("sub_images")
+}
+
+model Order {
+  id            Int       @id @default(autoincrement())
+  productId     Int       @map("product_id")
+  product       Product   @relation(fields: [productId], references: [id])
+  userId        Int       @map("user_id")
+  user          User      @relation(fields: [userId], references: [id])
+  orderQuantity Int       @map("order_quantity")
+  createdAt     DateTime? @default(now()) @map("created_at")
+
+  @@map("orders")
 }
