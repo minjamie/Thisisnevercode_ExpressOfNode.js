@@ -1,6 +1,6 @@
 import { listDao } from '../models';
 
-const getList = async () => {
+const getList = async (id) => {
   const product = await listDao.getList(id);
   return product;
 };

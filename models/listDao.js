@@ -1,28 +1,57 @@
 import prisma from '../prisma';
 
-const getList = async (id) => {
-  return await prisma.$queryRaw`
+const getSubImagesUrlByProductId = async (productId) => {
+  const subImageUrl = await prisma.$queryRaw`
+    SELECT 
+      s.key_number AS keyNumber,
+      s.sub_image_url AS subImageUrl,
+      s.product_id AS productId
+    FROM 
+      sub_images s
+    INNER JOIN 
+      products p
+    ON p.id = s.product_id
+    WHERE 
+      p.id = ${productId};
+  `;
+  return subImageUrl;
+};
+
+const getDetailImagesUrlByProductId = async (productId) => {
+  const detailImageUrl = await prisma.$queryRaw`
+    SELECT 
+      d.key_number AS keyNumber,
+      d.detail_image_url AS detailImageUrl,
+      d.product_id AS productId
+    FROM 
+      detail_images d
+    INNER JOIN 
+      products p
+    ON
+      p.id = d.product_id
+    WHERE 
+      p.id = ${productId};
+  `;
+  return detailImageUrl;
+};
+
+const getList = async () => {
+  const getProductList = await prisma.$queryRaw`
     SELECT 
       p.id,
+      p.name,
       p.price,
-      p.main_image_url,
-      di.key_number,
-      di.detail_image_url,
-      si.key_number,
-      si.sub_image_url
-    FROM 
+      p.main_image_url AS mainImageUrl
+    FROM
       products p
-    LEFT JOIN
-    detail_images di,
-    sub_images si
-    ON
-      i.product_id = p.id
-    WHERE
-      i.id > 0
-    ORDER BY p.id ASC
-    LIMIT 10
-    OFFSET ${id}
   `;
+
+  for (let i = 0; i < getProductList.length; i++) {
+    getProductList[i].subImage = await getSubImagesUrlByProductId(i + 1);
+    getProductList[i].detailImage = await getDetailImagesUrlByProductId(i + 1);
+  }
+
+  return getProductList;
 };
 
 export default { getList };
