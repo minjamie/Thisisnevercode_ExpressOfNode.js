@@ -49,7 +49,6 @@ const getProductById = async (id) => {
   return product;
 };
 
-export default { getProductById };
 const getSubImagesUrlByProductId = async (productId) => {
   const subImageUrl = await prisma.$queryRaw`
     SELECT s.key_number AS keyNumber,
@@ -154,4 +153,4 @@ const getProductBySort = async (sort) => {
   return products;
 };
 
-export default { getProductByTrend, getProductBySort };
+export default { getProductById, getProductByTrend, getProductBySort };
