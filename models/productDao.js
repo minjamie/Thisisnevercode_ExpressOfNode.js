@@ -29,9 +29,9 @@ const getDetailImagesUrlByProductId = async (productId) => {
 const getProductByPriceAsc = async () => {
   const products = await prisma.$queryRaw`
   SELECT p.id,
-  p.name,
-  p.price,
-  p.main_image_url AS image
+         p.name,
+         p.price,
+         p.main_image_url AS image
   FROM products p
   ORDER BY p.price
   `;
@@ -41,9 +41,9 @@ const getProductByPriceAsc = async () => {
 const getProductByPriceDesc = async () => {
   const products = await prisma.$queryRaw`
   SELECT p.id,
-  p.name,
-  p.price,
-  p.main_image_url AS image
+         p.name,
+         p.price,
+         p.main_image_url AS image
   FROM products p
   ORDER BY p.price DESC
   `;
@@ -53,9 +53,9 @@ const getProductByPriceDesc = async () => {
 const getProductByRecent = async () => {
   const products = await prisma.$queryRaw`
   SELECT p.id,
-  p.name,
-  p.price,
-  p.main_image_url AS image
+         p.name,
+         p.price,
+         p.main_image_url AS image
   FROM products p
   ORDER BY p.created_at
   `;
@@ -65,11 +65,11 @@ const getProductByRecent = async () => {
 const getProductByTrend = async () => {
   const products = await prisma.$queryRaw`
   SELECT p.id,
-  p.name,
-  p.price,
-  p.main_image_url,
-  COUNT(*) AS TOTAL,
-  o.product_id
+         p.name,
+         p.price,
+         p.main_image_url,
+         COUNT(*) AS TOTAL,
+         o.product_id
 FROM products p
 LEFT JOIN orders o
 ON p.id = o.product_id
@@ -102,38 +102,5 @@ const getProductBySort = async (sort) => {
   }
   return products;
 };
-
-// const getProductByProductId = async (productId) => {
-//   const [product] = await prisma.$queryRaw`
-//     SELECT p.id,
-//            p.name,
-//            p.price,
-//            p.main_image_url AS image
-//     FROM products p
-//     WHERE p.id = ${productId};
-//   `;
-//   product.subImage = await getSubImagesUrlByProductId(productId);
-//   product.detailImage = await getDetailImagesUrlByProductId(productId);
-//   return product;
-// };
-
-// const getProductList = async (order) => {
-//   const [{ numberOfProduct }] = await prisma.$queryRaw`
-//     SELECT COUNT(*) AS numberOfProduct
-//     FROM Products
-//   `;
-//   let result = {
-//     LIST_DATA: {
-//       category: 'Shoes',
-//       product: [],
-//     },
-//   };
-
-//   for (let i = 1; i < numberOfProduct; i++) {
-//     result.LIST_DATA.product.push(await getProductByProductId(i));
-//   }
-
-//   return result;
-// };
 
 export default { getProductByTrend, getProductBySort };
