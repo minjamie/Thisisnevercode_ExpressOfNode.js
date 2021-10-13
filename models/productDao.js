@@ -70,12 +70,12 @@ const getProductByTrend = async () => {
          p.main_image_url,
          COUNT(*) AS TOTAL,
          o.product_id
-FROM products p
-LEFT JOIN orders o
-ON p.id = o.product_id
-WHERE MONTH(o.created_at) = MONTH(CURRENT_TIMESTAMP)
-GROUP BY p.id
-ORDER BY TOTAL DESC;
+  FROM products p
+  LEFT JOIN orders o
+  ON p.id = o.product_id
+  WHERE MONTH(o.created_at) = MONTH(CURRENT_TIMESTAMP)
+  GROUP BY p.id
+  ORDER BY TOTAL DESC;
   `;
   return products;
 };
@@ -94,6 +94,7 @@ const getProductBySort = async (sort) => {
   for (const product of products) {
     productIdArr.push(product.id);
   }
+
   for (let i = 0; i < productIdArr.length; i++) {
     products[i].subImage = await getSubImagesUrlByProductId(productIdArr[i]);
     products[i].detailImage = await getDetailImagesUrlByProductId(
