@@ -18,7 +18,6 @@ const signInUser = catchAsync(async (req, res, next) => {
   }
 
   const userInfo = req.body;
-
   const accessToken = await signInService.signInUser(userInfo, res, next);
   const decodedToken = await jwtToken.verify(accessToken);
 
