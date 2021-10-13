@@ -14,7 +14,6 @@ const getProductById = async (req, res) => {
   }
 };
 
-export default { getProductById };
 const getProductBySort = async (req, res) => {
   const { sort } = req.query;
   const product = await productService.getProductBySort(sort);
@@ -22,5 +21,6 @@ const getProductBySort = async (req, res) => {
 };
 
 export default {
+  getProductById,
   getProductBySort,
 };

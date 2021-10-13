@@ -10,7 +10,6 @@ const getProductById = async (id) => {
   return product;
 };
 
-export default { getProductById };
 const getProductBySort = async (sort) => {
   const sortQuery = {
     pricehigh: await productDao.getProductBySort('pricehigh'),
@@ -21,4 +20,4 @@ const getProductBySort = async (sort) => {
   return sortQuery[sort];
 };
 
-export default { getProductBySort };
+export default { getProductById, getProductBySort };
