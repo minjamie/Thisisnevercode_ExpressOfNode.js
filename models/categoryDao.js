@@ -20,7 +20,7 @@ const mainCategory = async () => {
   }
   mainCategory[mainCategory.length - 1].sub_category_name = subCategory;
 
-  return { mainCategory };
+  return mainCategory;
 };
 
 export default { mainCategory };
