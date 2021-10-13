@@ -7,9 +7,9 @@ const getProductById = async (id) => {
       di.detail_image_url as detailImg
     FROM
       products P
-    LEFT JOIN 
+    LEFT JOIN
       detail_images di
-    ON 
+    ON
       di.product_id = p.id
     WHERE
       p.id = ${id}
@@ -21,9 +21,9 @@ const getProductById = async (id) => {
       si.sub_image_url as subImg
     FROM
       products P
-    LEFT JOIN 
+    LEFT JOIN
       sub_images si
-    ON 
+    ON
       si.product_id = p.id
     WHERE
       p.id = ${id}
