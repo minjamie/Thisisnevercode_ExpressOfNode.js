@@ -15,6 +15,11 @@ class AppError extends Error {
     return new AppError(400, message);
   }
 
+  static valueOfKeyError(message) {
+    console.log(this.statusCode);
+    return new AppError(400, message);
+  }
+
   static invalidError(message) {
     return new AppError(403, message);
   }

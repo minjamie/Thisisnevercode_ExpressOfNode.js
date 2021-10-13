@@ -1,17 +1,25 @@
 import { signUpService } from '../services';
 import AppError from '../errors/appError';
 import catchAsync from '../utils/catchAsync';
+import { checkEmptyKeyOfValue, checkEmptyKey } from '../utils/checkValidation';
 
 const createUser = catchAsync(async (req, res, next) => {
-  const userInputValue = Object.keys(req.body);
-  const totalNumberOfUserInput = 4;
+  const userInfo = req.body;
+  const KeyList = ['email', 'password', 'address', 'name'];
 
-  if (userInputValue.length !== totalNumberOfUserInput) {
-    next(new AppError.keyError('키가 비어있습니다'));
+  const emptyKey = checkEmptyKey(KeyList, userInfo);
+  if (emptyKey.length !== 0) {
+    next(new AppError.keyError(`${emptyKey} 키가 비어있습니다`));
     return;
   }
 
-  const userInfo = req.body;
+  const emptyKeyOfValue = checkEmptyKeyOfValue(userInfo);
+  if (emptyKeyOfValue) {
+    next(
+      new AppError.valueOfKeyError(`키의 ${emptyKeyOfValue} 값이 비어있습니다`)
+    );
+    return;
+  }
 
   const user = await signUpService.createUser(userInfo, res, next);
 
