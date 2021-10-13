@@ -1,12 +1,33 @@
 import prisma from '../prisma';
 
-const signUpUser = async () => {
+const createUser = async (userInfo) => {
+  const { name, email, password, address } = userInfo;
   return await prisma.$queryRaw`
-    SELECT 
-      c.id, c.category_name
-    FROM 
-      categories c
-  `;
+    INSERT INTO users
+      (name, email, password, address)
+    VALUES   
+      (${name}, ${email}, ${password}, ${address})
+    ;`;
 };
 
-export default { signUpUser };
+const getUserInfoByEmail = async (email) => {
+  return await prisma.$queryRaw`
+    SELECT
+      u.email, u.password, u.id, u.address, u.name
+    FROM
+      users u
+    WHERE
+      u.email = ${email}
+  ;`;
+};
+
+const getUserAllInfo = async () => {
+  return await prisma.$queryRaw`
+    SELECT
+      u.email, u.password, u.id, u.address
+    FROM
+      users u
+    ;`;
+};
+
+export default { createUser, getUserInfoByEmail, getUserAllInfo };
