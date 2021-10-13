@@ -31,7 +31,7 @@ const getProductByPriceAsc = async () => {
   SELECT p.id,
          p.name,
          p.price,
-         p.main_image_url AS image
+         p.main_image_url AS mainImageUrl
   FROM products p
   ORDER BY p.price
   `;
@@ -43,7 +43,7 @@ const getProductByPriceDesc = async () => {
   SELECT p.id,
          p.name,
          p.price,
-         p.main_image_url AS image
+         p.main_image_url AS mainImageUrl
   FROM products p
   ORDER BY p.price DESC
   `;
@@ -55,7 +55,7 @@ const getProductByRecent = async () => {
   SELECT p.id,
          p.name,
          p.price,
-         p.main_image_url AS image
+         p.main_image_url AS mainImageUrl
   FROM products p
   ORDER BY p.created_at
   `;
@@ -67,7 +67,7 @@ const getProductByTrend = async () => {
   SELECT p.id,
          p.name,
          p.price,
-         p.main_image_url AS image,
+         p.main_image_url AS mainImageUrl,
          COUNT(*) AS TOTAL,
          o.product_id
   FROM products p
