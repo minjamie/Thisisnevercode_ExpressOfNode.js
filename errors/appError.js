@@ -19,6 +19,14 @@ class AppError extends Error {
     return new AppError(403, message);
   }
 
+  static checkAuth(message) {
+    return new AppError(403, message);
+  }
+
+  static checkJWTAuth(message) {
+    return new AppError(403, message);
+  }
+
   static notFoundError(message) {
     return new AppError(404, message);
   }

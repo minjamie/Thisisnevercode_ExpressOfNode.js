@@ -1,22 +1,23 @@
-import jwt from '../../utils/jwt';
+import jwt from '../utils/jwt';
+import AppError from '../errors/appError';
+import catchAsync from '../utils/catchAsync';
 
-module.exports.check = async (req, res, next) => {
-  try {
-    if (!req.headers.cookie) {
-      return res.status(403).json({ msg: 'NO_AUTH' });
-    }
-    const token = req.headers.cookie.slice(4);
-    let payload;
-
-    try {
-      payload = await jwt.verify(token);
-    } catch (error) {
-      return res.status(403).json({ msg: 'NO_JWT_AUTH' });
-    }
-    req.payload = payload;
-
-    next();
-  } catch (error) {
-    next(error);
+module.exports.check = catchAsync(async (req, res, next) => {
+  if (!req.headers.cookie) {
+    next(new AppError.checkAuth('NO_AUTH'));
+    return;
   }
-};
+  const accessToken = req.headers.cookie.slice(4);
+  let payload;
+
+  payload = await jwt.verify(accessToken);
+  console.log(payload);
+
+  if (!payload) {
+    next(new AppError.checkJWTAuth("NO_JWT_AUTH'"));
+    return;
+  }
+  res.status(200).json({
+    msg: 'you are authUser',
+  });
+});
