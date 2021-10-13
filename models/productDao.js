@@ -3,7 +3,7 @@ import prisma from '../prisma';
 const getSubImagesUrlByProductId = async (productId) => {
   const subImageUrl = await prisma.$queryRaw`
     SELECT s.key_number AS keyNumber,
-           s.sub_image_url AS detailImageUrl,
+           s.sub_image_url AS subImageUrl,
            s.product_id AS productId
     FROM sub_images s
     INNER JOIN products p
@@ -67,7 +67,7 @@ const getProductByTrend = async () => {
   SELECT p.id,
          p.name,
          p.price,
-         p.main_image_url,
+         p.main_image_url AS image,
          COUNT(*) AS TOTAL,
          o.product_id
   FROM products p
