@@ -1,4 +1,5 @@
 import { signUpDao } from '../models';
+import AppError from '../errors/appError';
 import bcrypt from 'bcrypt';
 
 const makeHashedPsw = async (password) => {
@@ -7,18 +8,13 @@ const makeHashedPsw = async (password) => {
   return hashedPsw;
 };
 
-const createUser = async (userInfo) => {
+const createUser = async (userInfo, _, next) => {
   const [userData] = await signUpDao.getUserInfoByEmail(userInfo.email);
   if (userData) {
-    // 이미 가입된 유저인 경우
-    const error = new Error('DUPLICATED EMAIL');
-    error.message = '중복된 이메일입니다.';
-    error.statusCode = 409;
-    throw error;
+    next(AppError.duplicatedError('DUPLICATED_EMAIL'));
   } else {
-    // 신규 회원인 경우
     userInfo.password = await makeHashedPsw(userInfo.password);
-    await signUpDao.createUser(userInfo);
+    return await signUpDao.createUser(userInfo);
   }
 };
 

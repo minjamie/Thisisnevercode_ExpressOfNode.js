@@ -2,8 +2,8 @@ import express from 'express';
 import routes from './routes';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
-import apiError, { notFoundError } from './errors/apiError';
-import errorHandler from './errors/errorHandler';
+import AppError from './errors/appError';
+import errorHandler from './middlewares/errHandlerMiddleware';
 
 const app = express();
 
@@ -13,15 +13,10 @@ app.use(express.json());
 
 app.use(routes);
 
-app.use(errorHandler);
-
 app.use((req, res, next) => {
-  next(apiError.notFoundError('Not Found'));
+  next(new AppError.notFoundError(`NOT FOUND ${req.originalUrl}`));
 });
 
-app.use((err, req, res, next) => {
-  const { code, msg } = err;
-  res.status(code).json({ msg });
-});
+app.use(errorHandler);
 
 export default app;

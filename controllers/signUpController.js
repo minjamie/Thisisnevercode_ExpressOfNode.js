@@ -1,28 +1,25 @@
 import { signUpService } from '../services';
+import AppError from '../errors/appError';
+import catchAsync from '../utils/catchAsync';
 
-const createUser = async (req, res) => {
-  try {
-    const userInfo = req.body;
+const createUser = catchAsync(async (req, res, next) => {
+  const userInputValue = Object.keys(req.body);
+  const totalNumberOfUserInput = 4;
 
-    const userInputValue = Object.keys(req.body);
-    const totalNumberOfUserInput = 4;
-    if (userInputValue.length !== totalNumberOfUserInput) {
-      const error = new Error('Key_Error');
-      error.statusCode = 404;
-      error.message = '키가 비어있습니다.';
-      throw error;
-    }
+  if (userInputValue.length !== totalNumberOfUserInput) {
+    next(new AppError.keyError('키가 비어있습니다'));
+    return;
+  }
 
-    await signUpService.createUser(userInfo);
+  const userInfo = req.body;
+
+  const user = await signUpService.createUser(userInfo, res, next);
+
+  if (user) {
     res.status(201).json({
       msg: 'SUCCESS_SIGNUP',
     });
-  } catch (error) {
-    const { statusCode, message } = error;
-    res.status(400).json({
-      msg: message,
-    });
   }
-};
+});
 
 export default { createUser };
