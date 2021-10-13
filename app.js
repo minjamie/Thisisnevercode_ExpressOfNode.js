@@ -1,12 +1,11 @@
 import express from 'express';
 import routes from './routes';
-import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
+import AppError from './errors/appError';
+import errorHandler from './middlewares/errHandlerMiddleware';
 
 const app = express();
-
-dotenv.config();
 
 app.use(morgan('dev'));
 app.use(cookieParser('secret'));
@@ -15,14 +14,9 @@ app.use(express.json());
 app.use(routes);
 
 app.use((req, res, next) => {
-  res.status(404).send('Not Found');
-  next();
+  next(new AppError.notFoundError(`NOT FOUND ${req.originalUrl}`));
 });
 
-app.use((err, req, res, next) => {
-  const { statusCode, message } = err;
-  console.error(err);
-  res.status(statusCode || 500).send(message);
-});
+app.use(errorHandler);
 
 export default app;
