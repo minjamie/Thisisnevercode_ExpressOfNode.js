@@ -16,9 +16,9 @@ const mainCategory = async () => {
   `;
 
   for (let i = 0; i < mainCategory.length; i++) {
-    mainCategory[i].sub_category_name = null;
+    mainCategory[i].subCategoryName = null;
   }
-  mainCategory[mainCategory.length - 1].sub_category_name = subCategory;
+  mainCategory[mainCategory.length - 1].subCategoryName = subCategory;
 
   return mainCategory;
 };
