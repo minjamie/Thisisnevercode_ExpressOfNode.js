@@ -1,12 +1,14 @@
 import prisma from '../prisma';
 
-const signInUser = async () => {
+const getUserInfo = async (email) => {
   return await prisma.$queryRaw`
-    SELECT 
-      c.id, c.category_name
-    FROM 
-      categories c
-  `;
+    SELECT
+      u.email, u.password, u.id, u.address
+    FROM
+      users u
+    WHERE
+      u.email = ${email}
+  ;`;
 };
 
-export default { signInUser };
+export default { getUserInfo };
