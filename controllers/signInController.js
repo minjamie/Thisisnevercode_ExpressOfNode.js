@@ -2,7 +2,6 @@ import { signInService } from '../services';
 import { checkEmptyKeyOfValue, checkEmptyKey } from '../utils/checkValidation';
 import AppError from '../errors/appError';
 import catchAsync from '../utils/catchAsync';
-import jwtToken from '../utils/jwt';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -19,14 +18,13 @@ const signInUser = catchAsync(async (req, res, next) => {
 
   const emptyKeyOfValue = checkEmptyKeyOfValue(userInfo);
   if (emptyKeyOfValue) {
-    next(
-      new AppError.valueOfKeyError(`키의 ${emptyKeyOfValue} 값이 비어있습니다`)
-    );
+    next(new AppError.valueOfKeyError(`${emptyKeyOfValue}을 입력해주세요`));
     return;
   }
 
   const accessToken = await signInService.signInUser(userInfo, res, next);
-  const decodedToken = await jwtToken.verify(accessToken);
+  // 인가 된 사람의 경우
+  // const decodedToken = await jwtToken.verify(accessToken);
 
   res.cookie('jwt', accessToken, {
     expiresIn: process.env.JWT_TTL,
@@ -35,10 +33,11 @@ const signInUser = catchAsync(async (req, res, next) => {
 
   if (accessToken) {
     res.status(200).json({
-      msg: 'SUCCESS_SIGNIN',
-      decodedToken,
+      status: 'SUCCESS',
+      message: '로그인에 성공했습니다',
     });
   }
+  return;
 });
 
 export default { signInUser };

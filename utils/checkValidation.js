@@ -3,7 +3,6 @@ export const checkEmptyKeyOfValue = (userInfo) => {
 
   const userInputInfo = new Map(userInputData);
   for (let data of userInputInfo) {
-    console.log(data);
     if (data[1] === '') return data[0];
   }
 };
