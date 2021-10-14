@@ -11,7 +11,6 @@ module.exports.check = catchAsync(async (req, res, next) => {
   let payload;
 
   payload = await jwt.verify(accessToken);
-  console.log(payload);
 
   if (!payload) {
     next(new AppError.checkJWTAuth("NO_JWT_AUTH'"));
