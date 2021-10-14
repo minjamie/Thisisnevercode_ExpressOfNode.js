@@ -3,6 +3,7 @@ import { checkEmptyKeyOfValue, checkEmptyKey } from '../utils/checkValidation';
 import AppError from '../errors/appError';
 import catchAsync from '../utils/catchAsync';
 import dotenv from 'dotenv';
+import jwtToken from '../utils/jwt';
 
 dotenv.config();
 
@@ -23,10 +24,9 @@ const signInUser = catchAsync(async (req, res, next) => {
   }
 
   const accessToken = await signInService.signInUser(userInfo, res, next);
-  // 인가 된 사람의 경우
-  // const decodedToken = await jwtToken.verify(accessToken);
+  const decodedToken = await jwtToken.verify(accessToken);
 
-  res.cookie('jwt', accessToken, {
+  res.cookie('token', accessToken, {
     expiresIn: process.env.JWT_TTL,
     httpOnly: true,
   });
@@ -35,6 +35,7 @@ const signInUser = catchAsync(async (req, res, next) => {
     res.status(200).json({
       status: 'SUCCESS',
       message: '로그인에 성공했습니다',
+      Authorization: accessToken,
     });
   }
   return;

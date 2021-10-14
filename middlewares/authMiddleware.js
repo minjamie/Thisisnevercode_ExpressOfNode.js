@@ -3,6 +3,7 @@ import AppError from '../errors/appError';
 import catchAsync from '../utils/catchAsync';
 
 module.exports.check = catchAsync(async (req, res, next) => {
+  console.log(req.headers);
   if (!req.headers.cookie) {
     next(new AppError.checkAuth('NO_AUTH'));
     return;
