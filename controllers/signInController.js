@@ -1,25 +1,30 @@
 import { signInService } from '../services';
+import { checkEmptyKeyOfValue, checkEmptyKey } from '../utils/checkValidation';
 import AppError from '../errors/appError';
 import catchAsync from '../utils/catchAsync';
-import jwtToken from '../utils/jwt';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const signInUser = catchAsync(async (req, res, next) => {
-  const { email, password } = req.body;
+  const userInfo = req.body;
+  const KeyList = ['email', 'password'];
 
-  const userInputValue = Object.keys(req.body);
-  const totalNumberOfUserInput = 2;
-
-  if (userInputValue.length !== totalNumberOfUserInput) {
-    next(AppError.keyError('키가 비어있습니다'));
+  const emptyKey = checkEmptyKey(KeyList, userInfo);
+  if (emptyKey.length !== 0) {
+    next(new AppError.keyError(`${emptyKey} 키가 비어있습니다`));
     return;
   }
 
-  const userInfo = req.body;
+  const emptyKeyOfValue = checkEmptyKeyOfValue(userInfo);
+  if (emptyKeyOfValue) {
+    next(new AppError.valueOfKeyError(`${emptyKeyOfValue}을 입력해주세요`));
+    return;
+  }
+
   const accessToken = await signInService.signInUser(userInfo, res, next);
-  const decodedToken = await jwtToken.verify(accessToken);
+  // 인가 된 사람의 경우
+  // const decodedToken = await jwtToken.verify(accessToken);
 
   res.cookie('jwt', accessToken, {
     expiresIn: process.env.JWT_TTL,
@@ -28,10 +33,11 @@ const signInUser = catchAsync(async (req, res, next) => {
 
   if (accessToken) {
     res.status(200).json({
-      msg: 'SUCCESS_SIGNIN',
-      decodedToken,
+      status: 'SUCCESS',
+      message: '로그인에 성공했습니다',
     });
   }
+  return;
 });
 
 export default { signInUser };

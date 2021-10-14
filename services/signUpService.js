@@ -11,7 +11,7 @@ const makeHashedPsw = async (password) => {
 const createUser = async (userInfo, _, next) => {
   const [userData] = await signUpDao.getUserInfoByEmail(userInfo.email);
   if (userData) {
-    next(AppError.duplicatedError('DUPLICATED_EMAIL'));
+    next(AppError.duplicatedError('중복된 이메일입니다.'));
   } else {
     userInfo.password = await makeHashedPsw(userInfo.password);
     return await signUpDao.createUser(userInfo);

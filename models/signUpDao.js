@@ -21,13 +21,4 @@ const getUserInfoByEmail = async (email) => {
   ;`;
 };
 
-const getUserAllInfo = async () => {
-  return await prisma.$queryRaw`
-    SELECT
-      u.email, u.password, u.id, u.address
-    FROM
-      users u
-    ;`;
-};
-
-export default { createUser, getUserInfoByEmail, getUserAllInfo };
+export default { createUser, getUserInfoByEmail };
