@@ -1,36 +1,35 @@
-🏡 Team Thisisnevercode
-안녕하세요 저희는 'Thisisneverthat' 사이트의 클론 코딩을 진행하게 된 Thisisnevercode입니다.
+#### 🏡 Team Thisisnevercode
 
-👇 아래 이미지를 클릭하시면 시연 영상이 재생됩니다. SweetHome
+- 안녕하세요 저희는 'Thisisneverthat' 사이트의 클론 코딩을 진행하게 된 Thisisnevercode입니다.
+- 진행기간 : 2021년 10월 1일 ~ 2021년 10월 16일
 
-진행기간 : 2021년 10월 1일 ~ 2021년 10월 16일
+#### 👇 아래 이미지를 클릭하시면 시연 영상이 재생됩니다. Thisisnevercode.
 
-🔜 FrontEnd & 🔙 BackEnd
+#### 🔜 FrontEnd & 🔙 BackEnd
 
-김동권, 김민재, 김태규, 김휘민, 윤창현 
+- 김동권, 김민재, 김태규, 김휘민, 윤창현 
 
-🌟프로젝트 소개
-디스이즈네버댓(THISISNEVERTHAT)은 스포츠 앤 스트릿을 컨셉트로 2010년에 론칭한 브랜드입니다. 
+#### 🌟프로젝트 소개
 
-Goals : Wecode foundataion에서 배운 내용들을 최대한 적용해보기
+- 디스이즈네버댓(THISISNEVERTHAT)은 스포츠 앤 스트릿을 컨셉트로 2010년에 론칭한 브랜드입니다. 
 
-🛠 기술 스택
-FrontEnd 기술 스택
+#### Goals : Wecode foundataion에서 배운 내용들을 최대한 적용해보기
+
+#### 🛠 FrontEnd 기술 스택
 React
 React Router
 Sass
 Restful API
 Git & GitHub
 
-BackEnd 기술 스택
+#### 🛠 BackEnd 기술 스택
 Node.js
 Express
 MySQL
 Bcrypt, JWT
 Git & GitHub
 
-🌈 구현 기능
-FrontEnd
+#### 🌈 FrontEnd 구현 기능
 
 메인 페이지(김태규)
 - 캐러셀
@@ -59,23 +58,22 @@ Nav & Footer(김휘민)
 - 반응형
 - 약관 동의
 
+#### 🌈 BackEnd 구현 기능
 
-🌈 구현 기능
-BackEnd
-리스트 페이지 API
+리스트 페이지 API (김동권)
 - 무한스크롤 구현을 위한 상품 데이터 전달
 
-샹세 페이지 API
+샹세 페이지 API (김태규)
 - 상품 ID에 따른 상품 데이터 전달
-
-정렬 API
+ 
+정렬 API (김휘민)
 - 가격별 주문량에 따라 ordering된 상품 데이터 전달
 
-카테코리 API
+카테코리 API (윤창현)
 - 카테고리와 서브 카테고리 데이터 전달
 
-회원가입 및 로그인 API
--access token를 활용한 회원가입, 로그인과 로그아웃 기능(API)
+회원가입 및 로그인 API ()
+- access token를 활용한 회원가입, 로그인과 로그아웃 기능(API)
 
 
 modeling
