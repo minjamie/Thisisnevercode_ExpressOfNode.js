@@ -76,9 +76,11 @@ Nav & Footer(김휘민)
 - access token를 활용한 회원가입, 로그인과 로그아웃 기능(API)
 
 
-modeling
+## modeling
 ![thisisnevercode](https://user-images.githubusercontent.com/81890292/137630227-ce64a667-bb65-4a43-8b04-dba5f07a4f87.png)
 
+## API DOCUMENTARY
+![API DOCUMENTATION](https://documenter.getpostman.com/view/17483034/UV5WEJTR)
 
 ‼️ Reference
 이 프로젝트는 Thisisneverthat 사이트를 참조하여 학습목적으로 만들었습니다.
