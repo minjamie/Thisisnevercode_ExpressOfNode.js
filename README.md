@@ -80,8 +80,10 @@ Nav & Footer(김휘민)
 ![thisisnevercode](https://user-images.githubusercontent.com/81890292/137630227-ce64a667-bb65-4a43-8b04-dba5f07a4f87.png)
 
 ## API DOCUMENTARY
-![API DOCUMENTATION](https://documenter.getpostman.com/view/17483034/UV5WEJTR)
 https://documenter.getpostman.com/view/17483034/UV5WEJTR
+
+---
+
 ‼️ Reference
 이 프로젝트는 Thisisneverthat 사이트를 참조하여 학습목적으로 만들었습니다.
 실무수준의 프로젝트이지만 학습용으로 만들었기 때문에 이 코드를 활용하여 이득을 취하거나 무단 배포할 경우 법적으로 문제될 수 있습니다.
