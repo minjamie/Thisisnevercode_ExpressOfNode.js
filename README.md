@@ -44,8 +44,10 @@ Git & GitHub
 
 회원가입 및 로그인 API (김민재)
 - access token를 활용한 회원가입, 로그인과 로그아웃 기능(API)
+
 authMiddle를 활영한 인가 구현
 - authMiddle를 생성하여 인가가 필요한 부분에 미들웨어 전달
+
 전역 에러 핸들러 생성
 - catchAsycn를 활용한 에러 핸들링
 - 전역에서 에러를 잡을 수 있도록 errHandler, 미들웨러를 app.js에서 app.use에 전달
