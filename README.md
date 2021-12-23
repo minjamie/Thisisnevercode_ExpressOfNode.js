@@ -1,13 +1,13 @@
 ## 👨‍💻 Team Thisisnevercode
 
-- 안녕하세요 저희는 'Thisisneverthat' 사이트의 클론 코딩을 진행하게 된 Thisisnevercode입니다.
+- 안녕하세요 'Thisisneverthat' 사이트의 클론 코딩을 진행하게 된 Thisisnevercode입니다.
 - 진행기간 : 2021년 10월 1일 ~ 2021년 10월 16일
 
 ## 👇 아래 이미지를 클릭하시면 시연 영상이 재생됩니다. Thisisnevercode.
 
 ## 🔜 FrontEnd & 🔙 BackEnd
 
-- 김동권, 김민재, 김태규, 김휘민, 윤창현 
+- 김민재
 
 ## 🌟프로젝트 소개
 
@@ -42,7 +42,7 @@ Git & GitHub
 
 ## 🌈 BackEnd 구현 기능
 
-회원가입 및 로그인 API (김민재)
+회원가입 및 로그인 API 
 - access token를 활용한 회원가입, 로그인과 로그아웃 기능(API)
 
 authMiddle를 활영한 인가 구현
